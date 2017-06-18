@@ -1,40 +1,38 @@
-%define	pkgname econometrics
+%define octpkg Econometrics
+
+# Exclude .oct files from provides
+%define __provides_exclude_from ^%{octpkglibdir}/.*.oct$
 
 Summary:	Econometrics functions for Octave
-Name:       octave-%{pkgname}
-Version:	1.0.8
-Release:	6
-Source0:	%{pkgname}-%{version}.tar.gz
-License:	GPLv2+
+Name:		octave-%{octpkg}
+Version:	1.1.1
+Release:	1
+Source0:	http://downloads.sourceforge.net/octave/%{octpkg}-%{version}.tar.gz
+License:	GPLv3+
 Group:		Sciences/Mathematics
-Url:		http://octave.sourceforge.net/econometrics/
-Conflicts:	octave-forge <= 20090607
-Requires:	octave >= 2.9.7
-Requires:	octave-optim >= 0.0.0
+Url:		https://octave.sourceforge.io/%{octpkg}/
+
 BuildRequires:	octave-devel >= 2.9.7
-BuildRequires:	pkgconfig(gl)
-BuildRequires:	pkgconfig(glu)
-Requires:       octave(api) = %{octave_api}
+
+Requires:	octave(api) = %{octave_api}
+Requires:	octave-optim
+
 Requires(post): octave
 Requires(postun): octave
 
 %description
-Econometrics functions for Octave.
+Econometrics functions for Octave including MLE and GMM based techniques.
+
+This package is part of community Octave-Forge collection.
 
 %prep
-%setup -q -c %{pkgname}-%{version}
-cp %{SOURCE0} .
+%setup -qcT
+
+%build
+%octave_pkg_build -T
 
 %install
-%__install -m 755 -d %{buildroot}%{_datadir}/octave/packages/
-%__install -m 755 -d %{buildroot}%{_libdir}/octave/packages/
-export OCT_PREFIX=%{buildroot}%{_datadir}/octave/packages
-export OCT_ARCH_PREFIX=%{buildroot}%{_libdir}/octave/packages
-octave -q --eval "pkg prefix $OCT_PREFIX $OCT_ARCH_PREFIX; pkg install -verbose -nodeps -local %{pkgname}-%{version}.tar.gz"
-
-tar zxf %{SOURCE0} 
-mv %{pkgname}-%{version}/COPYING .
-mv %{pkgname}-%{version}/DESCRIPTION .
+%octave_pkg_install
 
 %post
 %octave_cmd pkg rebuild
@@ -46,6 +44,10 @@ mv %{pkgname}-%{version}/DESCRIPTION .
 %octave_cmd pkg rebuild
 
 %files
-%doc COPYING DESCRIPTION
-%{_datadir}/octave/packages/%{pkgname}-%{version}
-%{_libdir}/octave/packages/%{pkgname}-%{version}
+%dir %{octpkglibdir}
+%{octpkglibdir}/*
+%dir %{octpkgdir}
+%{octpkgdir}/*
+%doc %{octpkg}-%{version}/NEWS
+%doc %{octpkg}-%{version}/COPYING
+
