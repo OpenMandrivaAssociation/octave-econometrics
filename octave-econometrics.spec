@@ -4,10 +4,10 @@ Summary:	Econometrics functions for Octave
 Name:		octave-%{octpkg}
 Version:	1.1.2
 Release:	1
-Source0:	http://downloads.sourceforge.net/octave/%{octpkg}-%{version}.tar.gz
+Source0:	https://downloads.sourceforge.net/octave/%{octpkg}-%{version}.tar.gz
 License:	GPLv3+
 Group:		Sciences/Mathematics
-Url:		https://octave.sourceforge.io/%{octpkg}/
+Url:		https://packages.octave.org/%{octpkg}/
 
 BuildRequires:	octave-devel >= 4.4.0
 BuildRequires:	octave-optim
@@ -20,8 +20,6 @@ Requires(postun): octave
 
 %description
 Econometrics functions for Octave including MLE and GMM based techniques.
-
-This package is part of community Octave-Forge collection.
 
 %files
 %license COPYING
