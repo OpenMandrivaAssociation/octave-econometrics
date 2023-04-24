@@ -1,19 +1,19 @@
 %global octpkg econometrics
 
 Summary:	Econometrics functions for Octave
-Name:		octave-%{octpkg}
+Name:		octave-econometrics
 Version:	1.1.2
-Release:	1
-Source0:	https://downloads.sourceforge.net/octave/%{octpkg}-%{version}.tar.gz
+Release:	2
 License:	GPLv3+
 Group:		Sciences/Mathematics
-Url:		https://packages.octave.org/%{octpkg}/
+Url:		https://packages.octave.org/econometrics/
+Source0:	https://downloads.sourceforge.net/octave/econometrics-%{version}.tar.gz
 
-BuildRequires:	octave-devel >= 4.4.0
-BuildRequires:	octave-optim
+BuildRequires:  octave-devel >= 4.4.0
+BuildRequires:  octave-optim
 
 Requires:	octave(api) = %{octave_api}
-Requires:	octave-optim
+Requires:  	octave-optim
 
 Requires(post): octave
 Requires(postun): octave
@@ -24,18 +24,15 @@ Econometrics functions for Octave including MLE and GMM based techniques.
 %files
 %license COPYING
 %doc NEWS
-%dir %{octpkglibdir}
-%{octpkglibdir}/*
 %dir %{octpkgdir}
 %{octpkgdir}/*
+%dir %{octpkglibdir}
+%{octpkglibdir}/*
 
 #---------------------------------------------------------------------------
 
 %prep
 %autosetup -p1 -n %{octpkg}-%{version}
-
-# remove backup files
-#find . -name \*~ -delete
 
 %build
 %set_build_flags
