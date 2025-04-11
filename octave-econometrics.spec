@@ -3,7 +3,7 @@
 Summary:	Econometrics functions for Octave
 Name:		octave-econometrics
 Version:	1.1.2
-Release:	2
+Release:	3
 License:	GPLv3+
 Group:		Sciences/Mathematics
 Url:		https://packages.octave.org/econometrics/
